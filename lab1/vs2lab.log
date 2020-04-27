@@ -1,0 +1,27 @@
+2020-04-27 18:25:08,463 - vs2lab.lab1.clientserver.Server - INFO - Server bound to socket <socket.socket fd=13, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
+2020-04-27 18:25:43,918 - vs2lab.a1_layers.clientserver.Client - INFO - Client connected to socket <socket.socket fd=14, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 39122), raddr=('127.0.0.1', 50007)>
+2020-04-27 18:25:49,378 - vs2lab.a1_layers.clientserver.Client - INFO - Client down.
+2020-04-27 18:32:04,836 - vs2lab.lab1.clientserver.Server - INFO - Server bound to socket <socket.socket fd=58, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
+2020-04-27 18:32:35,584 - vs2lab.a1_layers.clientserver.Client - INFO - Client connected to socket <socket.socket fd=57, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 39340), raddr=('127.0.0.1', 50007)>
+2020-04-27 18:32:35,587 - vs2lab.a1_layers.clientserver.Client - INFO - Client down.
+2020-04-27 18:32:42,876 - vs2lab.a1_layers.clientserver.Client - INFO - Client connected to socket <socket.socket fd=57, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 39342), raddr=('127.0.0.1', 50007)>
+2020-04-27 18:32:42,892 - vs2lab.a1_layers.clientserver.Client - INFO - Client down.
+2020-04-27 18:34:46,751 - vs2lab.a1_layers.clientserver.Client - INFO - Client connected to socket <socket.socket fd=59, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 39418), raddr=('127.0.0.1', 50007)>
+2020-04-27 18:34:46,753 - vs2lab.a1_layers.clientserver.Client - INFO - Client down.
+2020-04-27 18:45:11,255 - vs2lab.lab1.clientserver.Server - INFO - Server bound to socket <socket.socket fd=5, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
+2020-04-27 18:45:11,255 - vs2lab.lab1.clientserver.Server - INFO - Server bound to socket <socket.socket fd=5, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
+2020-04-27 18:45:11,259 - vs2lab.a1_layers.clientserver.Client - INFO - Client connected to socket <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 40318), raddr=('127.0.0.1', 50007)>
+2020-04-27 18:45:11,259 - vs2lab.a1_layers.clientserver.Client - INFO - Client connected to socket <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 40318), raddr=('127.0.0.1', 50007)>
+2020-04-27 18:45:11,259 - vs2lab.a1_layers.clientserver.Client - INFO - Client down.
+2020-04-27 18:45:11,259 - vs2lab.a1_layers.clientserver.Client - INFO - Client down.
+2020-04-27 18:45:11,260 - vs2lab.lab1.clientserver.Server - INFO - Server down.
+2020-04-27 18:45:11,260 - vs2lab.lab1.clientserver.Server - INFO - Server down.
+2020-04-27 20:04:49,653 - vs2lab.a1_layers.architecture.client - INFO - Client connected to socket <socket.socket fd=13, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 40784), raddr=('127.0.0.1', 50007)>
+2020-04-27 20:47:31,632 - vs2lab.lab1.architecture.server - INFO - Server bound to socket <socket.socket fd=13, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
+2020-04-27 20:48:32,995 - vs2lab.a1_layers.architecture.client - INFO - Client connected to socket <socket.socket fd=13, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 44372), raddr=('127.0.0.1', 50007)>
+2020-04-27 20:56:38,411 - vs2lab.a1_layers.architecture.client - INFO - Client connected to socket <socket.socket fd=13, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 44380), raddr=('127.0.0.1', 50007)>
+2020-04-27 20:58:02,291 - vs2lab.lab1.architecture.server - INFO - Server bound to socket <socket.socket fd=14, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
+2020-04-27 21:04:30,957 - vs2lab.lab1.architecture.server - INFO - Server bound to socket <socket.socket fd=14, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
+2020-04-27 21:05:04,797 - vs2lab.a1_layers.architecture.client - INFO - Client connected to socket <socket.socket fd=15, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 44386), raddr=('127.0.0.1', 50007)>
+2020-04-27 21:11:42,705 - vs2lab.lab1.architecture.server - INFO - Server bound to socket <socket.socket fd=13, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
+2020-04-27 21:12:18,171 - vs2lab.a1_layers.architecture.client - INFO - Client connected to socket <socket.socket fd=14, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 44422), raddr=('127.0.0.1', 50007)>
