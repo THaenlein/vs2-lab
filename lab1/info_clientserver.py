@@ -19,7 +19,7 @@ class infoServer(threading.Thread):
          "Tim": "49294",
          "Alexa": "29042020"}
 
-
+    # Initialization; Socket gets created and bound to adress
     def __init__(self, *args, **kwargs):
         super(infoServer, self).__init__(*args, **kwargs)
         self._stopped = threading.Event()
@@ -30,6 +30,7 @@ class infoServer(threading.Thread):
         self._logger.info("Server bound to socket " + str(self.sock))
         print("server started")
 
+    # Serving the client; Gets information requested by client
     def serve(self):
         self.sock.listen(1)
         while self._serving:  # as long as _serving (checked after connections or socket timeouts)
@@ -59,6 +60,7 @@ class infoServer(threading.Thread):
         self.sock.close()
         self._logger.info("Server down.")
 
+    # Sets flag for stopping thread
     def stop(self):
         print("setting stop")
         self._stopped.set()
@@ -67,12 +69,14 @@ class infoServer(threading.Thread):
         print("isStoppped")
         return self._stopped.is_set()
 
+    # Gets one entry from telefondatenbank
     def get(self, name, connection):
         num = self.telefondatenbank.get(name)
         msg = ("ENTRY " + str(name) + " " + str(num))
         msg = padding(msg, ENTRY_SIZE)
         connection.send(msg.encode('ascii'))
 
+    # Gets all entries from telefondatenbank
     def getAll(self, connection):
         metadata = str(len(self.telefondatenbank))
         msg = ("SIZE " + metadata)
@@ -83,16 +87,18 @@ class infoServer(threading.Thread):
             msg = padding(msg, ENTRY_SIZE)
             connection.send(msg.encode('ascii'))
 
-
+# CLient side and requests
 class clientInterface:
     logger = logging.getLogger("vs2lab.a1_layers.architecture.client")
 
+    # Connecting to socket
     def __init__(self):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.connect((constCS.HOST, constCS.PORT))
         self.logger.info("Client connected to socket " + str(self.sock))
         print("client started")
 
+    # Requesting for one entry from telefondatenbank
     def get(self, name):
         msg = ("GET " + name)
         msg = padding(msg, GET_MSG_SIZE)
@@ -103,6 +109,7 @@ class clientInterface:
         #print(msg_out)
         return msg_out
 
+    # Requesting for all entries from telefondatenbank
     def getAll(self):
         msg = "GETALL"
         msg = padding(msg, GET_MSG_SIZE)
@@ -119,6 +126,7 @@ class clientInterface:
             #print(msg_out)
         return msg_list
 
+    # Close socket
     def close(self):
         self.sock.close()
 
