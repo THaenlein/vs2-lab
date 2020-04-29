@@ -1,7 +1,7 @@
 # **Aktuelle Aufgaben**
 - [ ] Schritte im Socket-Lebenszyklus durch Log-Ausgaben erweitern (Konstantin)
 - [x] Unit-Tests für die Dienstschnittstelle und die Backend-Funktionen (Tim)
-- [x] Je ein Jupyter-Notebook für Client und Server erstellen und mit Markdown erläutern (Pascal)
+- [x] Ein Jupyter-Notebook für Client und Server erstellen und mit Markdown erläutern (Pascal)
 - [ ] Code dokumentieren und kommentieren (Alexa)
 
 ___
