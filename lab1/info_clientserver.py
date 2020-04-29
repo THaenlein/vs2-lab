@@ -129,16 +129,38 @@ def padding(existingMsg, size):
 
 
 if __name__ == "__main__":
-    print("---Main")
-    # Create server in thread
+    # Create server as thread
     server = infoServer()
     serverThread = threading.Thread(target=server.serve)
     serverThread.start()
 
     # Create client
     client = clientInterface()
+
+    # Send get request
     result = client.get("Pascal")
     print(result)
 
+    # Send get request
+    result = client.get("Fabian")
+    print(result)
+
+    # Send get request
+    result = client.get("Konstantin")
+    print(result)
+
+    # Send get request
+    result = client.get("Tim")
+    print(result)
+
+    # Send get request
+    result = client.get("Alexa")
+    print(result)
+
+    # Send getAll request
+    result = client.getAll()
+    print(result)
+
+    # Close connection and terminate thread
     client.close()
     server.stop()
