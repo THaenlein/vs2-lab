@@ -9,7 +9,7 @@ lab_logging.setup(stream_level=logging.INFO)
 
 
 class TestEchoService(unittest.TestCase):
-    _server = info_clientserver.infoServer() # create a single server for all tests
+    _server = info_clientserver.InfoServer() # create a single server for all tests
     _server_thread = threading.Thread(target=_server.serve)  # define thread for running server
 
     @classmethod
@@ -18,7 +18,7 @@ class TestEchoService(unittest.TestCase):
 
     def setUp(self):
         super().setUp()
-        self.client = info_clientserver.clientInterface() # create new client before each test
+        self.client = info_clientserver.ClientInterface() # create new client before each test
 
     def test_clientGetValid(self):
         # Testing for a valid entry in the dictionary
