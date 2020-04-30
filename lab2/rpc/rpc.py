@@ -1,4 +1,5 @@
 import constRPC
+import time, threading
 
 from context import lab_channel
 
@@ -12,8 +13,10 @@ class DBList:
         return self
 
 
-class Client:
+# Client inheriting from Thread
+class Client(threading.Thread):
     def __init__(self):
+        threading.Thread.__init__(self)
         self.chan = lab_channel.Channel()
         self.client = self.chan.join('client')
         self.server = None
@@ -29,8 +32,12 @@ class Client:
         assert isinstance(db_list, DBList)
         msglst = (constRPC.APPEND, data, db_list)  # message payload
         self.chan.send_to(self.server, msglst)  # send msg to server
+        # Do not wait for response
+
+    # Callback function waiting for server response
+    def responseReceived(self):
         msgrcv = self.chan.receive_from(self.server)  # wait for response
-        return msgrcv[1]  # pass it to caller
+        print("Result: {}".format(msgrcv[1].value))
 
 
 class Server:
