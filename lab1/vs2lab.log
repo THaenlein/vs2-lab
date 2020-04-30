@@ -1,27 +1,110 @@
-2020-04-27 18:25:08,463 - vs2lab.lab1.clientserver.Server - INFO - Server bound to socket <socket.socket fd=13, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
-2020-04-27 18:25:43,918 - vs2lab.a1_layers.clientserver.Client - INFO - Client connected to socket <socket.socket fd=14, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 39122), raddr=('127.0.0.1', 50007)>
-2020-04-27 18:25:49,378 - vs2lab.a1_layers.clientserver.Client - INFO - Client down.
-2020-04-27 18:32:04,836 - vs2lab.lab1.clientserver.Server - INFO - Server bound to socket <socket.socket fd=58, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
-2020-04-27 18:32:35,584 - vs2lab.a1_layers.clientserver.Client - INFO - Client connected to socket <socket.socket fd=57, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 39340), raddr=('127.0.0.1', 50007)>
-2020-04-27 18:32:35,587 - vs2lab.a1_layers.clientserver.Client - INFO - Client down.
-2020-04-27 18:32:42,876 - vs2lab.a1_layers.clientserver.Client - INFO - Client connected to socket <socket.socket fd=57, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 39342), raddr=('127.0.0.1', 50007)>
-2020-04-27 18:32:42,892 - vs2lab.a1_layers.clientserver.Client - INFO - Client down.
-2020-04-27 18:34:46,751 - vs2lab.a1_layers.clientserver.Client - INFO - Client connected to socket <socket.socket fd=59, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 39418), raddr=('127.0.0.1', 50007)>
-2020-04-27 18:34:46,753 - vs2lab.a1_layers.clientserver.Client - INFO - Client down.
-2020-04-27 18:45:11,255 - vs2lab.lab1.clientserver.Server - INFO - Server bound to socket <socket.socket fd=5, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
-2020-04-27 18:45:11,255 - vs2lab.lab1.clientserver.Server - INFO - Server bound to socket <socket.socket fd=5, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
-2020-04-27 18:45:11,259 - vs2lab.a1_layers.clientserver.Client - INFO - Client connected to socket <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 40318), raddr=('127.0.0.1', 50007)>
-2020-04-27 18:45:11,259 - vs2lab.a1_layers.clientserver.Client - INFO - Client connected to socket <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 40318), raddr=('127.0.0.1', 50007)>
-2020-04-27 18:45:11,259 - vs2lab.a1_layers.clientserver.Client - INFO - Client down.
-2020-04-27 18:45:11,259 - vs2lab.a1_layers.clientserver.Client - INFO - Client down.
-2020-04-27 18:45:11,260 - vs2lab.lab1.clientserver.Server - INFO - Server down.
-2020-04-27 18:45:11,260 - vs2lab.lab1.clientserver.Server - INFO - Server down.
-2020-04-27 20:04:49,653 - vs2lab.a1_layers.architecture.client - INFO - Client connected to socket <socket.socket fd=13, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 40784), raddr=('127.0.0.1', 50007)>
-2020-04-27 20:47:31,632 - vs2lab.lab1.architecture.server - INFO - Server bound to socket <socket.socket fd=13, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
-2020-04-27 20:48:32,995 - vs2lab.a1_layers.architecture.client - INFO - Client connected to socket <socket.socket fd=13, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 44372), raddr=('127.0.0.1', 50007)>
-2020-04-27 20:56:38,411 - vs2lab.a1_layers.architecture.client - INFO - Client connected to socket <socket.socket fd=13, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 44380), raddr=('127.0.0.1', 50007)>
-2020-04-27 20:58:02,291 - vs2lab.lab1.architecture.server - INFO - Server bound to socket <socket.socket fd=14, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
-2020-04-27 21:04:30,957 - vs2lab.lab1.architecture.server - INFO - Server bound to socket <socket.socket fd=14, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
-2020-04-27 21:05:04,797 - vs2lab.a1_layers.architecture.client - INFO - Client connected to socket <socket.socket fd=15, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 44386), raddr=('127.0.0.1', 50007)>
-2020-04-27 21:11:42,705 - vs2lab.lab1.architecture.server - INFO - Server bound to socket <socket.socket fd=13, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
-2020-04-27 21:12:18,171 - vs2lab.a1_layers.architecture.client - INFO - Client connected to socket <socket.socket fd=14, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 44422), raddr=('127.0.0.1', 50007)>
+2020-04-30 01:53:48,895 - vs2lab.lab1.info_clientserver.server - INFO - Server bound to socket <socket.socket fd=13, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
+2020-04-30 01:54:35,133 - vs2lab.lab1.info_clientserver.client - INFO - Client connected to socket <socket.socket fd=13, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 44214), raddr=('127.0.0.1', 50007)>
+2020-04-30 01:54:39,595 - vs2lab.lab1.info_clientserver.server - INFO - Server received message: "b'GETALL         '" from: ('127.0.0.1', 44214)
+2020-04-30 01:54:39,595 - vs2lab.lab1.info_clientserver.server - INFO - All entries were send to the client.
+2020-04-30 01:54:39,595 - vs2lab.lab1.info_clientserver.client - INFO - Client sent request: "GETALL         "
+2020-04-30 01:54:39,596 - vs2lab.lab1.info_clientserver.client - INFO - Reply will contain this amount of entries: "5"
+2020-04-30 01:54:39,596 - vs2lab.lab1.info_clientserver.client - INFO - Client received reply: "['Pascal: 018054646', 'Fabian: 01571234', 'Konstantin: 01751234', 'Tim: 49294', 'Alexa: 29042020']
+2020-04-30 01:54:44,577 - vs2lab.lab1.info_clientserver.server - INFO - Server received message: "b'GET Konstantin '" from: ('127.0.0.1', 44214)
+2020-04-30 01:54:44,577 - vs2lab.lab1.info_clientserver.server - INFO - The following entry was sent to the client: ENTRY Konstantin 01751234               
+2020-04-30 01:54:44,577 - vs2lab.lab1.info_clientserver.client - INFO - Client sent request: "GET Konstantin "
+2020-04-30 01:54:44,577 - vs2lab.lab1.info_clientserver.client - INFO - Client received reply: "ENTRY Konstantin 01751234               
+2020-04-30 01:55:12,735 - vs2lab.lab1.info_clientserver.server - INFO - Server received message: "b'GET Thomas     '" from: ('127.0.0.1', 44214)
+2020-04-30 01:55:12,735 - vs2lab.lab1.info_clientserver.server - INFO - The following entry was sent to the client: ENTRY Thomas None                       
+2020-04-30 01:55:12,735 - vs2lab.lab1.info_clientserver.client - INFO - Client sent request: "GET Thomas     "
+2020-04-30 01:55:12,735 - vs2lab.lab1.info_clientserver.client - INFO - Client received reply: "ENTRY Thomas None                       
+2020-04-30 07:03:21,150 - vs2lab.lab1.info_clientserver.server - INFO - Server bound to socket <socket.socket fd=58, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
+2020-04-30 07:03:24,702 - vs2lab.lab1.info_clientserver.client - INFO - Client connected to socket <socket.socket fd=63, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 53820), raddr=('127.0.0.1', 50007)>
+2020-04-30 07:03:26,586 - vs2lab.lab1.info_clientserver.client - INFO - Client sent request: "GET Alexa      "
+2020-04-30 07:03:26,586 - vs2lab.lab1.info_clientserver.server - INFO - Server received message: "b'GET Alexa      '" from: ('127.0.0.1', 53820)
+2020-04-30 07:03:26,588 - vs2lab.lab1.info_clientserver.client - INFO - Client received reply: "ENTRY Alexa 29042020                    
+2020-04-30 07:03:26,589 - vs2lab.lab1.info_clientserver.server - INFO - The following entry was sent to the client: ENTRY Alexa 29042020                    
+2020-04-30 07:03:32,291 - vs2lab.lab1.info_clientserver.client - INFO - Client sent request: "GETALL         "
+2020-04-30 07:03:32,291 - vs2lab.lab1.info_clientserver.server - INFO - Server received message: "b'GETALL         '" from: ('127.0.0.1', 53820)
+2020-04-30 07:03:32,293 - vs2lab.lab1.info_clientserver.client - INFO - Reply will contain this amount of entries: "5"
+2020-04-30 07:03:32,293 - vs2lab.lab1.info_clientserver.server - INFO - All entries were send to the client.
+2020-04-30 07:03:32,294 - vs2lab.lab1.info_clientserver.client - INFO - Client received reply: "['Pascal: 018054646', 'Fabian: 01571234', 'Konstantin: 01751234', 'Tim: 49294', 'Alexa: 29042020']
+2020-04-30 07:03:35,314 - vs2lab.lab1.info_clientserver.client - INFO - Client socket closed.
+2020-04-30 07:03:38,316 - vs2lab.lab1.info_clientserver.server - INFO - Server down.
+2020-04-30 07:13:06,653 - vs2lab.lab1.info_clientserver.server - INFO - Server bound to socket <socket.socket fd=5, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
+2020-04-30 07:13:06,653 - vs2lab.lab1.info_clientserver.server - INFO - Server bound to socket <socket.socket fd=5, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
+2020-04-30 07:13:06,656 - vs2lab.lab1.info_clientserver.client - INFO - Client connected to socket <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 53874), raddr=('127.0.0.1', 50007)>
+2020-04-30 07:13:06,656 - vs2lab.lab1.info_clientserver.client - INFO - Client connected to socket <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 53874), raddr=('127.0.0.1', 50007)>
+2020-04-30 07:13:06,656 - vs2lab.lab1.info_clientserver.client - INFO - Client sent request: GETALL         
+2020-04-30 07:13:06,656 - vs2lab.lab1.info_clientserver.client - INFO - Client sent request: GETALL         
+2020-04-30 07:13:06,656 - vs2lab.lab1.info_clientserver.server - INFO - Server received message: "b'GETALL         '" from: ('127.0.0.1', 53874)
+2020-04-30 07:13:06,656 - vs2lab.lab1.info_clientserver.server - INFO - Server received message: "b'GETALL         '" from: ('127.0.0.1', 53874)
+2020-04-30 07:13:06,656 - vs2lab.lab1.info_clientserver.client - INFO - Reply will contain this amount of entries: 5
+2020-04-30 07:13:06,656 - vs2lab.lab1.info_clientserver.client - INFO - Reply will contain this amount of entries: 5
+2020-04-30 07:13:06,657 - vs2lab.lab1.info_clientserver.server - INFO - All entries were send to the client.
+2020-04-30 07:13:06,657 - vs2lab.lab1.info_clientserver.server - INFO - All entries were send to the client.
+2020-04-30 07:13:06,657 - vs2lab.lab1.info_clientserver.client - INFO - Client received reply: "['Pascal: 018054646', 'Fabian: 01571234', 'Konstantin: 01751234', 'Tim: 49294', 'Alexa: 29042020']
+2020-04-30 07:13:06,657 - vs2lab.lab1.info_clientserver.client - INFO - Client received reply: "['Pascal: 018054646', 'Fabian: 01571234', 'Konstantin: 01751234', 'Tim: 49294', 'Alexa: 29042020']
+2020-04-30 07:13:06,657 - vs2lab.lab1.info_clientserver.client - INFO - Client socket closed.
+2020-04-30 07:13:06,657 - vs2lab.lab1.info_clientserver.client - INFO - Client socket closed.
+2020-04-30 07:13:06,657 - vs2lab.lab1.info_clientserver.client - INFO - Client connected to socket <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 53876), raddr=('127.0.0.1', 50007)>
+2020-04-30 07:13:06,657 - vs2lab.lab1.info_clientserver.client - INFO - Client connected to socket <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 53876), raddr=('127.0.0.1', 50007)>
+2020-04-30 07:13:06,657 - vs2lab.lab1.info_clientserver.client - INFO - Client sent request: GET Marvin     
+2020-04-30 07:13:06,657 - vs2lab.lab1.info_clientserver.client - INFO - Client sent request: GET Marvin     
+2020-04-30 07:13:06,657 - vs2lab.lab1.info_clientserver.server - INFO - Server received message: "b'GET Marvin     '" from: ('127.0.0.1', 53876)
+2020-04-30 07:13:06,657 - vs2lab.lab1.info_clientserver.server - INFO - Server received message: "b'GET Marvin     '" from: ('127.0.0.1', 53876)
+2020-04-30 07:13:06,658 - vs2lab.lab1.info_clientserver.server - INFO - The following entry was sent to the client: ENTRY Marvin None                       
+2020-04-30 07:13:06,658 - vs2lab.lab1.info_clientserver.server - INFO - The following entry was sent to the client: ENTRY Marvin None                       
+2020-04-30 07:13:06,658 - vs2lab.lab1.info_clientserver.client - INFO - Client received reply: ENTRY Marvin None                       
+2020-04-30 07:13:06,658 - vs2lab.lab1.info_clientserver.client - INFO - Client received reply: ENTRY Marvin None                       
+2020-04-30 07:13:06,658 - vs2lab.lab1.info_clientserver.client - INFO - Client socket closed.
+2020-04-30 07:13:06,658 - vs2lab.lab1.info_clientserver.client - INFO - Client socket closed.
+2020-04-30 07:13:06,658 - vs2lab.lab1.info_clientserver.client - INFO - Client connected to socket <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 53878), raddr=('127.0.0.1', 50007)>
+2020-04-30 07:13:06,658 - vs2lab.lab1.info_clientserver.client - INFO - Client connected to socket <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 53878), raddr=('127.0.0.1', 50007)>
+2020-04-30 07:13:06,659 - vs2lab.lab1.info_clientserver.client - INFO - Client sent request: GET Esenosarumensemwonken
+2020-04-30 07:13:06,659 - vs2lab.lab1.info_clientserver.client - INFO - Client sent request: GET Esenosarumensemwonken
+2020-04-30 07:13:06,659 - vs2lab.lab1.info_clientserver.server - INFO - Server received message: "b'GET Esenosarume'" from: ('127.0.0.1', 53878)
+2020-04-30 07:13:06,659 - vs2lab.lab1.info_clientserver.server - INFO - Server received message: "b'GET Esenosarume'" from: ('127.0.0.1', 53878)
+2020-04-30 07:13:06,659 - vs2lab.lab1.info_clientserver.server - INFO - The following entry was sent to the client: ENTRY Esenosarume None                  
+2020-04-30 07:13:06,659 - vs2lab.lab1.info_clientserver.server - INFO - The following entry was sent to the client: ENTRY Esenosarume None                  
+2020-04-30 07:13:06,659 - vs2lab.lab1.info_clientserver.client - INFO - Client received reply: ENTRY Esenosarume None                  
+2020-04-30 07:13:06,659 - vs2lab.lab1.info_clientserver.client - INFO - Client received reply: ENTRY Esenosarume None                  
+2020-04-30 07:13:06,659 - vs2lab.lab1.info_clientserver.server - INFO - Server received message: "b'nsemwonken'" from: ('127.0.0.1', 53878)
+2020-04-30 07:13:06,659 - vs2lab.lab1.info_clientserver.server - INFO - Server received message: "b'nsemwonken'" from: ('127.0.0.1', 53878)
+2020-04-30 07:13:06,659 - vs2lab.lab1.info_clientserver.client - INFO - Client socket closed.
+2020-04-30 07:13:06,659 - vs2lab.lab1.info_clientserver.client - INFO - Client socket closed.
+2020-04-30 07:13:06,660 - vs2lab.lab1.info_clientserver.client - INFO - Client connected to socket <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 53880), raddr=('127.0.0.1', 50007)>
+2020-04-30 07:13:06,660 - vs2lab.lab1.info_clientserver.client - INFO - Client connected to socket <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 53880), raddr=('127.0.0.1', 50007)>
+2020-04-30 07:13:06,660 - vs2lab.lab1.info_clientserver.client - INFO - Client sent request: GET Pascal     
+2020-04-30 07:13:06,660 - vs2lab.lab1.info_clientserver.server - INFO - Server received message: "b'GET Pascal     '" from: ('127.0.0.1', 53880)
+2020-04-30 07:13:06,660 - vs2lab.lab1.info_clientserver.client - INFO - Client sent request: GET Pascal     
+2020-04-30 07:13:06,660 - vs2lab.lab1.info_clientserver.server - INFO - Server received message: "b'GET Pascal     '" from: ('127.0.0.1', 53880)
+2020-04-30 07:13:06,660 - vs2lab.lab1.info_clientserver.server - INFO - The following entry was sent to the client: ENTRY Pascal 018054646                  
+2020-04-30 07:13:06,660 - vs2lab.lab1.info_clientserver.client - INFO - Client received reply: ENTRY Pascal 018054646                  
+2020-04-30 07:13:06,660 - vs2lab.lab1.info_clientserver.server - INFO - The following entry was sent to the client: ENTRY Pascal 018054646                  
+2020-04-30 07:13:06,660 - vs2lab.lab1.info_clientserver.client - INFO - Client received reply: ENTRY Pascal 018054646                  
+2020-04-30 07:13:06,661 - vs2lab.lab1.info_clientserver.client - INFO - Client socket closed.
+2020-04-30 07:13:06,661 - vs2lab.lab1.info_clientserver.client - INFO - Client socket closed.
+2020-04-30 07:13:09,681 - vs2lab.lab1.info_clientserver.server - INFO - Server down.
+2020-04-30 07:13:09,681 - vs2lab.lab1.info_clientserver.server - INFO - Server down.
+2020-04-30 07:14:53,820 - vs2lab.lab1.info_clientserver.server - INFO - Server bound to socket <socket.socket fd=58, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
+2020-04-30 07:14:54,553 - vs2lab.lab1.info_clientserver.client - INFO - Client connected to socket <socket.socket fd=59, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 53928), raddr=('127.0.0.1', 50007)>
+2020-04-30 07:14:55,941 - vs2lab.lab1.info_clientserver.client - INFO - Client sent request: GET Alexa      
+2020-04-30 07:14:55,941 - vs2lab.lab1.info_clientserver.server - INFO - Server received message: "b'GET Alexa      '" from: ('127.0.0.1', 53928)
+2020-04-30 07:14:55,944 - vs2lab.lab1.info_clientserver.server - INFO - The following entry was sent to the client: ENTRY Alexa 29042020                    
+2020-04-30 07:14:55,945 - vs2lab.lab1.info_clientserver.client - INFO - Client received reply: ENTRY Alexa 29042020                    
+2020-04-30 07:14:57,547 - vs2lab.lab1.info_clientserver.client - INFO - Client sent request: GETALL         
+2020-04-30 07:14:57,548 - vs2lab.lab1.info_clientserver.server - INFO - Server received message: "b'GETALL         '" from: ('127.0.0.1', 53928)
+2020-04-30 07:14:57,549 - vs2lab.lab1.info_clientserver.server - INFO - All entries were send to the client.
+2020-04-30 07:14:57,550 - vs2lab.lab1.info_clientserver.client - INFO - Reply will contain this amount of entries: 5
+2020-04-30 07:14:57,551 - vs2lab.lab1.info_clientserver.client - INFO - Client received reply: "['Pascal: 018054646', 'Fabian: 01571234', 'Konstantin: 01751234', 'Tim: 49294', 'Alexa: 29042020']
+2020-04-30 07:15:02,550 - vs2lab.lab1.info_clientserver.client - INFO - Client socket closed.
+2020-04-30 07:15:02,553 - vs2lab.lab1.info_clientserver.server - INFO - Server down.
+2020-04-30 07:33:58,926 - vs2lab.lab1.info_clientserver.server - INFO - Server bound to socket <socket.socket fd=57, family=AddressFamily.AF_INET, type=2049, proto=0, laddr=('127.0.0.1', 50007)>
+2020-04-30 07:33:59,931 - vs2lab.lab1.info_clientserver.client - INFO - Client connected to socket <socket.socket fd=59, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 54010), raddr=('127.0.0.1', 50007)>
+2020-04-30 07:34:00,846 - vs2lab.lab1.info_clientserver.client - INFO - Client sent request: GET Alexa      
+2020-04-30 07:34:00,846 - vs2lab.lab1.info_clientserver.server - INFO - Server received message: "b'GET Alexa      '" from: ('127.0.0.1', 54010)
+2020-04-30 07:34:00,848 - vs2lab.lab1.info_clientserver.server - INFO - The following entry was sent to the client: Entry Alexa 29042020                     
+2020-04-30 07:34:00,848 - vs2lab.lab1.info_clientserver.client - INFO - Client received reply: Entry Alexa 29042020                     
+2020-04-30 07:34:03,532 - vs2lab.lab1.info_clientserver.client - INFO - Client sent request: GETALL         
+2020-04-30 07:34:03,532 - vs2lab.lab1.info_clientserver.server - INFO - Server received message: "b'GETALL         '" from: ('127.0.0.1', 54010)
+2020-04-30 07:34:03,534 - vs2lab.lab1.info_clientserver.client - INFO - Reply will contain this amount of entries: 5
+2020-04-30 07:34:03,535 - vs2lab.lab1.info_clientserver.server - INFO - All entries were send to the client.
+2020-04-30 07:34:03,536 - vs2lab.lab1.info_clientserver.client - INFO - Client received reply: "['Pascal: 018054646', 'Fabian: 01571234', 'Konstantin: 01751234', 'Tim: 49294', 'Alexa: 29042020']
+2020-04-30 07:34:05,105 - vs2lab.lab1.info_clientserver.client - INFO - Client socket closed.
+2020-04-30 07:34:05,108 - vs2lab.lab1.info_clientserver.server - INFO - Server down.

@@ -7,7 +7,7 @@ from context import lab_logging
 
 lab_logging.setup(stream_level=logging.INFO)  # init logging channels for the lab
 
-ENTRY_KEYWORD = "Entry "
+ENTRY_KEYWORD = "Entry "                        yy
 DICT_SIZE_KEYWORD = "Size "
 
 REQUEST_MSG_SIZE = 15                            # Size of client requests
