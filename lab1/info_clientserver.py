@@ -7,15 +7,18 @@ from context import lab_logging
 
 lab_logging.setup(stream_level=logging.INFO)  # init logging channels for the lab
 
-GET_MSG_SIZE = 15   # Size of requests send by client
-SIZE_MSG_SIZE = 10  # Message size for Metadata (size of telefondatenbank)
-ENTRY_SIZE = 40     # Size of replys send by client
+ENTRY_KEYWORD = "Entry "
+DICT_SIZE_KEYWORD = "Size "
+
+REQUEST_MSG_SIZE = 15                            # Size of client requests
+REPLY_MSG_SIZE = len(ENTRY_KEYWORD) + 35         # Size of server replies
+METADATA_MSG_SIZE = len(DICT_SIZE_KEYWORD) + 5   # Message size of number of entries in phoneDirectory
 
 
 class InfoServer(threading.Thread):
     _logger = logging.getLogger("vs2lab.lab1.info_clientserver.server")
     _serving = True
-    telefondatenbank = \
+    phoneDirectory = \
         {"Pascal": "018054646",
          "Fabian": "01571234",
          "Konstantin": "01751234",
@@ -40,7 +43,7 @@ class InfoServer(threading.Thread):
                 (connection, address) = self.sock.accept()  # returns new socket and address of client
 
                 while True:  # forever
-                    data = connection.recv(GET_MSG_SIZE)  # receive data from client
+                    data = connection.recv(REQUEST_MSG_SIZE)  # receive data from client
                     if not data:
                         break  # stop if client stopped
                     self._logger.info("Server received message: \"" + str(data) + "\" from: " + str(address))
@@ -71,23 +74,23 @@ class InfoServer(threading.Thread):
         print("isStoppped")
         return self._stopped.is_set()
 
-    # Gets one entry from telefondatenbank
+    # Gets one entry from phoneDirectory
     def get(self, name, connection):
-        num = self.telefondatenbank.get(name)
-        msg = ("ENTRY " + str(name) + " " + str(num))
-        msg = padding(msg, ENTRY_SIZE)
+        num = self.phoneDirectory.get(name)
+        msg = (ENTRY_KEYWORD + str(name) + " " + str(num))
+        msg = padding(msg, REPLY_MSG_SIZE)
         connection.send(msg.encode('ascii'))
         self._logger.info("The following entry was sent to the client: " + str(msg))
 
-    # Gets all entries from telefondatenbank
+    # Gets all entries from phoneDirectory
     def getAll(self, connection):
-        metadata = str(len(self.telefondatenbank))
-        msg = ("SIZE " + metadata)
-        msg = padding(msg, SIZE_MSG_SIZE)
+        metadata = str(len(self.phoneDirectory))
+        msg = (DICT_SIZE_KEYWORD + metadata)
+        msg = padding(msg, METADATA_MSG_SIZE)
         connection.send(msg.encode('ascii'))
-        for name, num in self.telefondatenbank.items():
-            msg = ("ENTRY " + (str(name) + " " + str(num)))
-            msg = padding(msg, ENTRY_SIZE)
+        for name, num in self.phoneDirectory.items():
+            msg = (ENTRY_KEYWORD + (str(name) + " " + str(num)))
+            msg = padding(msg, REPLY_MSG_SIZE)
             connection.send(msg.encode('ascii'))
         self._logger.info("All entries were send to the client.")
 
@@ -102,31 +105,31 @@ class ClientInterface:
         self.sock.connect((constCS.HOST, constCS.PORT))
         self.logger.info("Client connected to socket " + str(self.sock))
 
-    # Requesting for one entry from telefondatenbank
+    # Requesting for one entry from phoneDirectory
     def get(self, name):
         msg = ("GET " + name)
-        msg = padding(msg, GET_MSG_SIZE)
+        msg = padding(msg, REQUEST_MSG_SIZE)
         self.sock.send(msg.encode('ascii'))  # send GET request with parameter
-        self.logger.info("Client sent request: \"" + str(msg) + "\"")
-        data = self.sock.recv(ENTRY_SIZE)  # receive entry
+        self.logger.info("Client sent request: " + str(msg))
+        data = self.sock.recv(REPLY_MSG_SIZE)  # receive entry
         msg_out = data.decode('ascii')
-        self.logger.info("Client received reply: \"" + str(msg_out))
+        self.logger.info("Client received reply: " + str(msg_out))
         msg_out = msg_out.split()[1] + ": " + msg_out.split()[2]
         return msg_out
 
-    # Requesting for all entries from telefondatenbank
+    # Requesting for all entries from phoneDirectory
     def getAll(self):
         msg = "GETALL"
-        msg = padding(msg, GET_MSG_SIZE)
+        msg = padding(msg, REQUEST_MSG_SIZE)
         self.sock.send(msg.encode('ascii'))  # send GETALL request without parameters
-        self.logger.info("Client sent request: \"" + str(msg) + "\"")
-        metadata = self.sock.recv(SIZE_MSG_SIZE)  # receive number of entries
+        self.logger.info("Client sent request: " + str(msg))
+        metadata = self.sock.recv(METADATA_MSG_SIZE)  # receive number of entries
         entries = int(metadata.split()[1])
-        self.logger.info("Reply will contain this amount of entries: \"" + str(entries) + "\"")
+        self.logger.info("Reply will contain this amount of entries: " + str(entries))
         msg_list = []
 
         for i in range(0, entries):
-            data = self.sock.recv(ENTRY_SIZE)     # receive entry
+            data = self.sock.recv(REPLY_MSG_SIZE)     # receive entry
             msg_out = data.decode('ascii')
             msg_out = msg_out.split()[1] + ": " + msg_out.split()[2]
             msg_list.append(msg_out)
@@ -139,7 +142,7 @@ class ClientInterface:
         self.logger.info("Client socket closed.")
 
 
-def padding(existingMsg, size):     # used to assure specific message size
+def padding(existingMsg, size):     # used to assure specific message size for requests and replies
     while len(existingMsg) < size:
         existingMsg += " "
     return existingMsg
