@@ -7,7 +7,7 @@ from context import lab_logging
 
 lab_logging.setup(stream_level=logging.INFO)  # init logging channels for the lab
 
-ENTRY_KEYWORD = "Entry "                        yy
+ENTRY_KEYWORD = "Entry "
 DICT_SIZE_KEYWORD = "Size "
 
 REQUEST_MSG_SIZE = 15                            # Size of client requests
@@ -18,7 +18,7 @@ METADATA_MSG_SIZE = len(DICT_SIZE_KEYWORD) + 5   # Message size of number of ent
 class InfoServer(threading.Thread):
     _logger = logging.getLogger("vs2lab.lab1.info_clientserver.server")
     _serving = True
-    phoneDirectory = \
+    _phoneDirectory = \
         {"Pascal": "018054646",
          "Fabian": "01571234",
          "Konstantin": "01751234",
@@ -67,30 +67,28 @@ class InfoServer(threading.Thread):
 
     # Sets flag for stopping thread
     def stop(self):
-        print("setting stop")
         self._stopped.set()
 
     def isStopped(self):
-        print("isStoppped")
         return self._stopped.is_set()
 
     # Gets one entry from phoneDirectory
     def get(self, name, connection):
-        num = self.phoneDirectory.get(name)
+        num = self._phoneDirectory.get(name)
         msg = (ENTRY_KEYWORD + str(name) + " " + str(num))
-        msg = padding(msg, REPLY_MSG_SIZE)
+        msg = fillLeftover(msg, REPLY_MSG_SIZE)
         connection.send(msg.encode('ascii'))
         self._logger.info("The following entry was sent to the client: " + str(msg))
 
     # Gets all entries from phoneDirectory
     def getAll(self, connection):
-        metadata = str(len(self.phoneDirectory))
+        metadata = str(len(self._phoneDirectory))
         msg = (DICT_SIZE_KEYWORD + metadata)
-        msg = padding(msg, METADATA_MSG_SIZE)
+        msg = fillLeftover(msg, METADATA_MSG_SIZE)
         connection.send(msg.encode('ascii'))
-        for name, num in self.phoneDirectory.items():
+        for name, num in self._phoneDirectory.items():
             msg = (ENTRY_KEYWORD + (str(name) + " " + str(num)))
-            msg = padding(msg, REPLY_MSG_SIZE)
+            msg = fillLeftover(msg, REPLY_MSG_SIZE)
             connection.send(msg.encode('ascii'))
         self._logger.info("All entries were send to the client.")
 
@@ -108,7 +106,7 @@ class ClientInterface:
     # Requesting for one entry from phoneDirectory
     def get(self, name):
         msg = ("GET " + name)
-        msg = padding(msg, REQUEST_MSG_SIZE)
+        msg = fillLeftover(msg, REQUEST_MSG_SIZE)
         self.sock.send(msg.encode('ascii'))  # send GET request with parameter
         self.logger.info("Client sent request: " + str(msg))
         data = self.sock.recv(REPLY_MSG_SIZE)  # receive entry
@@ -120,7 +118,7 @@ class ClientInterface:
     # Requesting for all entries from phoneDirectory
     def getAll(self):
         msg = "GETALL"
-        msg = padding(msg, REQUEST_MSG_SIZE)
+        msg = fillLeftover(msg, REQUEST_MSG_SIZE)
         self.sock.send(msg.encode('ascii'))  # send GETALL request without parameters
         self.logger.info("Client sent request: " + str(msg))
         metadata = self.sock.recv(METADATA_MSG_SIZE)  # receive number of entries
@@ -142,10 +140,8 @@ class ClientInterface:
         self.logger.info("Client socket closed.")
 
 
-def padding(existingMsg, size):     # used to assure specific message size for requests and replies
-    while len(existingMsg) < size:
-        existingMsg += " "
-    return existingMsg
+def fillLeftover(existingMsg, size): # used to assure specific message size for requests and replies
+    return existingMsg + (" " * (size-len(existingMsg)))
 
 
 if __name__ == "__main__":
