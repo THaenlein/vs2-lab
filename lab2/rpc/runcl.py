@@ -9,15 +9,12 @@ lab_logging.setup(stream_level=logging.INFO)
 cl = rpc.Client()
 cl.run()
 
-# Creating client thread waiting for server response
-callbackThread = threading.Thread(target=cl.responseReceived)
-callbackThread.start()
-
+# Create list and call append function
 base_list = rpc.DBList({'foo'})
-cl.append('bar', base_list)
+thread = cl.append('bar', base_list, cl.responseReceived)
 
 # Waiting for server response. Do something else.
-while callbackThread.isAlive():
+while thread.isAlive():
     print("Waiting...")
     time.sleep(1)
 

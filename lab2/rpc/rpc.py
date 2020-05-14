@@ -28,11 +28,18 @@ class Client(threading.Thread):
     def stop(self):
         self.chan.leave('client')
 
-    def append(self, data, db_list):
+    def append(self, data, db_list, callbackFunction):
         assert isinstance(db_list, DBList)
         msglst = (constRPC.APPEND, data, db_list)  # message payload
         self.chan.send_to(self.server, msglst)  # send msg to server
-        # Do not wait for response
+        result = self.chan.receive_from(self.server, timeout=3)
+        if result[1] == constRPC.OK:
+            callbackThread = threading.Thread(target=callbackFunction)
+            callbackThread.start()
+            return callbackThread
+        else:
+            print("Not acknowledged!")
+            return None
 
     # Callback function waiting for server response
     def responseReceived(self):
@@ -59,13 +66,10 @@ class Server:
                 client = msgreq[0]  # see who is the caller
                 msgrpc = msgreq[1]  # fetch call & parameters
                 if constRPC.APPEND == msgrpc[0]:  # check what is being requested
+                    ack = constRPC.OK
+                    self.chan.send_to({client}, ack)
                     result = self.append(msgrpc[1], msgrpc[2])  # do local call
                     time.sleep(10)
                     self.chan.send_to({client}, result)  # return response
                 else:
                     pass  # unsupported request, simply ignore
-
-    def messageReceived(self):
-        # Wait for client request
-        # TODO
-        return

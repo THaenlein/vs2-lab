@@ -12,8 +12,5 @@ logger.debug('Flushed all redis keys.')
 
 srv = rpc.Server()
 
-# Creating server thread waiting for client request
-# TODO
-
 # Waiting for server response. Do something else.
 srv.run()
