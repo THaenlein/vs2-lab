@@ -97,22 +97,31 @@ class ChordNode:
         self.finger_table[0] = self.node_list[self.node_list.index(self.node_id) - 1]  # Predecessor
         self.finger_table[1:] = [self.finger(i) for i in range(1, self.n_bits + 1)]  # Successors
 
-    def local_successor_node(self, key) -> int:
+    def local_successor_node(self, key, client):
         """
         Locate successor of a key in local finger table
         :param key: key to be located
+        :param client: client node to send the response to
         :return: located node name
         """
         if self.in_between(key, self.finger_table[0] + 1, self.node_id + 1):  # key in (FT[0],self]
-            return self.node_id  # node is responsible
+            print("node is responsible")
+            self.channel.send_to([client], (constChord.LOOKUP_REP, self.node_id))
+            return
         elif self.in_between(key, self.node_id + 1, self.finger_table[1]):  # key in (self,FT[1]]
-            return self.finger_table[1]  # successor responsible
+            print("successor responsible")
+            self.channel.send_to([client], (constChord.LOOKUP_REP, self.finger_table[1]))
+            return
         for i in range(1, self.n_bits):  # go through rest of FT
             if self.in_between(key, self.finger_table[i], self.finger_table[(i + 1) ]):
-                return self.finger_table[i]  # key in [FT[i],FT[i+1])
-        if self.in_between(key, self.finger_table[-1], self.finger_table[0] + 1): # key outside FT
-            return self.finger_table[-1]  # key in [FT[-1],FT[0]]
-        assert False # we cannot be here
+                print("forwarding request to node: ", self.finger_table[i])
+                self.channel.send_to([str(self.finger_table[i])], (constChord.LOOKUP_REQ, key, client))
+                return
+        if self.in_between(key, self.finger_table[-1], self.finger_table[0] + 1):  # key outside FT
+            print("forwarding request to node: ", self.finger_table[-1])
+            self.channel.send_to([str(self.finger_table[-1])], (constChord.LOOKUP_REQ, key, client))
+            return
+        assert False  # we cannot be here
 
     def enter(self):
         self.channel.bind(str(self.node_id))  # bind current pid
@@ -149,14 +158,7 @@ class ChordNode:
             if request[0] == constChord.LOOKUP_REQ:  # A lookup request
                 self.logger.info("Node {:04n} received LOOKUP {:04n} from {:04n}."
                                  .format(self.node_id, int(request[1]), int(sender)))
-
-                # look up and return local successor 
-                next_id: int = self.local_successor_node(request[1])
-                self.channel.send_to([sender], (constChord.LOOKUP_REP, next_id))
-
-                # Finally do a sanity check
-                if not self.channel.exists(next_id):  # probe for existence
-                    self.delete_node(next_id)  # purge disappeared node
+                self.local_successor_node(request[1], request[2])
 
             elif request[0] == constChord.JOIN:
                 # Join request (the node was already registered above)
