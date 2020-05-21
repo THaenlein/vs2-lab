@@ -1,13 +1,7 @@
-# Task sink
-# Binds PULL socket to tcp://localhost:5558
-# Collects results from workers via that socket
-#
-# Author: Lev Givon <lev(at)columbia(dot)edu>
-
 import sys
-import time
 import zmq
 import pickle
+from collections import Counter
 
 import constPipe
 
@@ -21,14 +15,16 @@ context = zmq.Context()
 receiver = context.socket(zmq.PULL)
 receiver.bind(address)
 
+wordCount = Counter()
+
 print("Reducer ready.")
 
-# Wait for start of batch
-s = receiver.recv()
-
-print("Reducer synchronized.")
-
-# Process 100 confirmations
+# Count words
 while True:
     word = pickle.loads(receiver.recv())
-    print("Received word: {}".format(word))
+    if word == '\r':
+        wordCount.clear()
+        print("Resetting counter.")
+    else:
+        wordCount[word] += 1
+        print("Received word \"{}\": {}".format(word, wordCount[word]))

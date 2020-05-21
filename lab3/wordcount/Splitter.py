@@ -1,12 +1,5 @@
-# Task ventilator
-# Binds PUSH socket to tcp://localhost:5557
-# Sends batch of tasks to workers via that socket
-#
-# Author: Lev Givon <lev(at)columbia(dot)edu>
-
 import pickle
 import zmq
-import random
 import time
 
 import constPipe
@@ -24,10 +17,13 @@ address = "tcp://" + constPipe.SENDER + ":" + constPipe.TASKS
 sender = context.socket(zmq.PUSH)
 sender.bind(address)
 
-# Socket with direct access to the sink: used to synchronize start of batch
-#address = "tcp://" + constPipe.SENDER + ":" + constPipe.RESULTS
-#sink = context.socket(zmq.PUSH)
-#sink.connect(address)
+# Socket with direct access to both reducers: used to reset word count
+address = "tcp://" + constPipe.SENDER + ":" + constPipe.REDUCER1
+reducer1 = context.socket(zmq.PUSH)
+reducer1.connect(address)
+address = "tcp://" + constPipe.SENDER + ":" + constPipe.REDUCER2
+reducer2 = context.socket(zmq.PUSH)
+reducer2.connect(address)
 
 print("Reading file.")
 with open("inputFile.txt") as file:
@@ -38,8 +34,9 @@ print("Press Enter when the workers are ready: ")
 _ = raw_input()
 print("Sending tasks to workers…")
 
-# The first message is "0" and signals start of batch
-#sink.send(b'0')
+# Reset word count in reducers
+reducer1.send(pickle.dumps('\r'))
+reducer2.send(pickle.dumps('\r'))
 
 # Send 100 tasks
 print("Sending {} workloads.".format(len(lines)))

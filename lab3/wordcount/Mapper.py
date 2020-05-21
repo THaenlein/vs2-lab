@@ -1,15 +1,7 @@
-# Task worker
-# Connects PULL socket to tcp://localhost:5557
-# Collects workloads from ventilator via that socket
-# Connects PUSH socket to tcp://localhost:5558
-# Sends results to sink via that socket
-#
-# Author: Lev Givon <lev(at)columbia(dot)edu>
-
 import pickle
 import sys
-import time
 import zmq
+import re
 
 import constPipe
 
@@ -35,15 +27,13 @@ print("Worker {} ready.".format(me))
 # Process tasks forever
 while True:
     sentence = pickle.loads(receiver.recv())
-
-    # Simple progress indicator for the viewer
     print("{} got sentence: {}".format(me, sentence))
 
     # Do the work
-    words = sentence.split()
+    words = re.findall(r"[\w]+", sentence)
     print("Splitted in {} words.".format(len(words)))
 
-    # Send results to sink
+    # Send results to reducer
     for word in words:
         if len(word) < 4:
             reducer1.send(pickle.dumps(word))
