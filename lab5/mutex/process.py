@@ -2,7 +2,7 @@ import logging
 import random
 import time
 
-from constMutex import ENTER, RELEASE, ALLOW, KICK
+from constMutex import ENTER, RELEASE, ALLOW
 
 
 class Process:
@@ -28,7 +28,7 @@ class Process:
 
     <Message>: (Timestamp, Process_ID, <Request_Type>)
 
-    <Request Type>: ENTER | ALLOW | RELEASE | KICK
+    <Request Type>: ENTER | ALLOW | RELEASE
 
     """
 
@@ -90,11 +90,6 @@ class Process:
 
     def __kick(self, process_id_to_kick):
         self.clock = self.clock + 1  # Increment clock value
-        msg = (self.clock, self.process_id, KICK, process_id_to_kick)
-        self.__run_kick(process_id_to_kick)
-        self.channel.send_to(self.other_processes, msg)
-
-    def __run_kick(self, process_id_to_kick):
         assert process_id_to_kick != self.process_id, "Request error: tried to kick self"
         self.queue = [entry for entry in self.queue if entry[1] != process_id_to_kick]
 
@@ -136,9 +131,6 @@ class Process:
                 # assure release requester indeed has access (his ENTER is first in queue)
                 assert self.queue[0][1] == msg[1] and self.queue[0][2] == ENTER, 'State error: inconsistent remote RELEASE'
                 del (self.queue[0])  # Just remove first message
-            elif msg[2] == KICK:
-                process_id_to_kick = msg[3]
-                self.__run_kick(process_id_to_kick)
 
             self.__cleanup_queue()  # Finally sort and cleanup the queue
         else:
