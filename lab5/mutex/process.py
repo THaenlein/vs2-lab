@@ -2,7 +2,7 @@ import logging
 import random
 import time
 
-from constMutex import ENTER, RELEASE, ALLOW, ALIVE
+from constMutex import ENTER, RELEASE, ALLOW, KICK
 
 
 class Process:
@@ -28,55 +28,35 @@ class Process:
 
     <Message>: (Timestamp, Process_ID, <Request_Type>)
 
-    <Request Type>: ENTER | ALLOW  | RELEASE
+    <Request Type>: ENTER | ALLOW | RELEASE | KICK
 
     """
 
     def __init__(self, chan):
         self.channel = chan  # Create ref to actual channel
         self.process_id = self.channel.join('proc')  # Find out who you are
+        self.all_processes_original: list = []
         self.all_processes: list = []  # All procs in the proc group
         self.other_processes: list = []  # Needed to multicast to others
         self.queue = []  # The request queue list
-        self.processes_alive = []
-        self.last_ping = dict()
         self.clock = 0  # The current logical clock
         self.logger = logging.getLogger("vs2lab.lab5.mutex.process.Process")
 
-    # Extract processId from mapId and return actual process
-    # param mapId: String
-    #       "Proc_*" Possible Values are: A, B, C ...
-    def extractProcessIdentifier(self, mapId):
-        lastChar = mapId[-1]
-        # This is a terrible way of determining the index
-        # Maybe there's the root of the problem
-        index = ord(lastChar) - 65
-        # TODO: Fix "List index out of range"
-        return self.all_processes[index]
+    def __map_queue_ids(self):
+        return [(entry[0], self.__mapid(entry[1]), entry[2]) for entry in self.queue]
 
-    def cleanUpQueueAfterCrash(self):
-        newQueue = []
-        # Check if process_id of queued messages is in processes list
-        for message in self.queue:
-            if message[1] in self.all_processes:
-                newQueue.append(message)
-        self.queue = newQueue
-        self.__cleanup_queue()
-
-    def pingAlive(self):
-        self.clock += 1
-        message = (self.clock, self.process_id, ALIVE)
-        self.channel.send_to(self.other_processes, message)
+    def __mapids(self, iterable):
+        return [self.__mapid(entry) for entry in iterable]
 
     def __mapid(self, id='-1'):
         # resolve channel member address to a human friendly identifier
         if id == '-1':
             id = self.process_id
-        return 'Proc_' + chr(65 + self.all_processes.index(id))
+        return 'Proc_' + chr(65 + self.all_processes_original.index(id))
 
     def __cleanup_queue(self):
         if len(self.queue) > 0:
-            #self.queue.sort(key = lambda tup: tup[0])
+            # self.queue.sort(key = lambda tup: tup[0])
             self.queue.sort()
             # There should never be old ALLOW messages at the head of the queue
             while self.queue[0][2] == ALLOW:
@@ -108,6 +88,21 @@ class Process:
         # Multicast release notification
         self.channel.send_to(self.other_processes, msg)
 
+    def __kick(self, process_id_to_kick):
+        self.clock = self.clock + 1  # Increment clock value
+        msg = (self.clock, self.process_id, KICK, process_id_to_kick)
+        self.__run_kick(process_id_to_kick)
+        self.channel.send_to(self.other_processes, msg)
+
+    def __run_kick(self, process_id_to_kick):
+        assert process_id_to_kick != self.process_id, "Request error: tried to kick self"
+        self.queue = [entry for entry in self.queue if entry[1] != process_id_to_kick]
+
+        if process_id_to_kick in self.all_processes:
+            self.logger.info("{}: kicking {}...".format(self.__mapid(), self.__mapid(process_id_to_kick)))
+            self.all_processes.remove(process_id_to_kick)
+            self.other_processes.remove(process_id_to_kick)
+
     def __allowed_to_enter(self):
         # See who has sent a message
         processes_with_later_message = set([req[1] for req in self.queue[1:]])
@@ -118,23 +113,18 @@ class Process:
 
     def __receive(self):
          # Pick up any message
-        _receive = self.channel.receive_from(self.other_processes, 10) 
+        _receive = self.channel.receive_from(self.other_processes, 10)
         if _receive:
             msg = _receive[1]
-            sender = self.__mapid(_receive[0])
 
             self.clock = max(self.clock, msg[0])  # Adjust clock value...
             self.clock = self.clock + 1  # ...and increment
-
-            self.last_ping[sender] = msg[0]
 
             self.logger.debug("{} received {} from {}.".format(
                 self.__mapid(),
                 "ENTER" if msg[2] == ENTER
                 else "ALLOW" if msg[2] == ALLOW
-                else "RELEASE" if msg[2] == RELEASE
-                else "ALIVE",
-                self.__mapid(msg[1])))
+                else "RELEASE", self.__mapid(msg[1])))
 
             if msg[2] == ENTER:
                 self.queue.append(msg)  # Append an ENTER request
@@ -145,34 +135,33 @@ class Process:
             elif msg[2] == RELEASE:
                 # assure release requester indeed has access (his ENTER is first in queue)
                 assert self.queue[0][1] == msg[1] and self.queue[0][2] == ENTER, 'State error: inconsistent remote RELEASE'
-                if len(self.queue) > 0:
-                    del (self.queue[0])  # Just remove first message
+                del (self.queue[0])  # Just remove first message
+            elif msg[2] == KICK:
+                process_id_to_kick = msg[3]
+                self.__run_kick(process_id_to_kick)
 
             self.__cleanup_queue()  # Finally sort and cleanup the queue
         else:
-            self.logger.warning("{} timed out on RECEIVE.".format(self.__mapid()))
-            timedOutProcesses = []
-            # Iterate over last pings and check who didn't send alive since last check.
-            # Remove those processes from lists and clean queue
-            # Reset ping for processes that recently sent one
-            for process, ping in self.last_ping.items():
-                #print("Process {} has ping {}.".format(process, ping))
-                if ping == 0:
-                    processId = self.extractProcessIdentifier(process)
-                    # Sometimes a process removes itself from the list. wtf?
-                    # Maybe use different functions to extract processId for self.other_processes and self.all_processes
-                    print("Process {} removes process {} from list ".format(self.__mapid()[-1], process[-1]))
-                    self.other_processes.remove(processId)
-                    self.all_processes.remove(processId)
-                    timedOutProcesses.append(process)
-                else:
-                    self.last_ping[process] = 0
+            self.logger.warning("{}: timed out on RECEIVE".format(self.__mapid()))
+            process_ids_in_queue_allow = set([entry[1] for entry in self.queue if entry[2] == ALLOW])
+            process_ids_to_kick = [process_id for process_id in self.other_processes if process_id not in process_ids_in_queue_allow]
 
-            for crashedProcess in timedOutProcesses:
-                del self.last_ping[crashedProcess]
+            length = len(process_ids_to_kick)
 
-            self.cleanUpQueueAfterCrash()
-            self.pingAlive()
+            if length == 0:
+                # crashed inside cs -> all required ALLOWs in queue -> first entry is process
+                process_id_to_kick = self.queue[0][1]
+            elif length == 1:
+                # crashed outside cs -> one ALLOW missing in queue -> missing ALLOW is process
+                process_id_to_kick = process_ids_to_kick[0]
+            else:
+                process_id_to_kick = None
+
+            if process_id_to_kick != None:
+                self.logger.info("{}: process {} seems to be dead. Informing other processes and kicking process...".format(self.__mapid(), self.__mapid(process_id_to_kick)))
+                self.__kick(process_id_to_kick)
+            else:
+                self.logger.info("{}: couldn't identify dead process in the following queue:\n{}".format(self.__mapid(), self.__map_queue_ids()))
 
     def init(self):
         self.channel.bind(self.process_id)
@@ -180,20 +169,17 @@ class Process:
         self.all_processes = list(self.channel.subgroup('proc'))
         # sort string elements by numerical order
         self.all_processes.sort(key=lambda x: int(x))
+        self.all_processes_original = self.all_processes.copy()
 
         self.other_processes = list(self.channel.subgroup('proc'))
         self.other_processes.remove(self.process_id)
-
-        # Set initial pings for other processes
-        for otherProcess in self.other_processes:
-            self.last_ping[self.__mapid(otherProcess)] = self.clock
 
         self.logger.info("Member {} joined channel as {}."
                          .format(self.process_id, self.__mapid()))
 
     def run(self):
         while True:
-            # Enter the critical section if there are more than one process left
+            # Enter the critical section if there are more than one processes left
             # and random is true
             if len(self.all_processes) > 1 and \
                     random.choice([True, False]):
